@@ -1,7 +1,7 @@
 <template>
 
     <h1>
-        Carnivorus Plant Cultivation Guides
+        Carnivorous Plant Cultivation Guides
     </h1>
     <ul>
         <li><a href='#NepenthesGuide'>Nepenthes</a>
@@ -14,13 +14,13 @@
             </ul>
         </li>
         <li><a href='#HeliamphoraGuide'>Heliamphora </a> </li>
-            <li><a href='#CephalotusGuide'>Cephalotus</a>
-                <ul>
-                    <li>Beginner Guide</li>
-                </ul>
-            </li>
-            <li><a href='#HighlandGrowChamber'>Highland Grow Chamber</a>
-            </li>
+        <li><a href='#CephalotusGuide'>Cephalotus</a>
+            <ul>
+                <li>Beginner Guide</li>
+            </ul>
+        </li>
+        <li><a href='#HighlandGrowChamber'>Highland Grow Chamber</a>
+        </li>
 
     </ul>
 
@@ -169,7 +169,5 @@
 </template>
 
 <style>
-Body {
-    background-color: papayawhip
-}
+
 </style>
