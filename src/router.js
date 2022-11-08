@@ -5,7 +5,7 @@ import TheBlog from './components/blog/TheBlog.vue'
 import TheGuide from './components/guide/TheGuide.vue'
 
 const routesArr = [
-    { path: '/', component: PlantList, headerLabel: 'Home' },
+    { path: '/', component: PlantList },
     { path: '/plants', component: PlantList, headerLabel: 'Plants' },
     { path: '/plants/addPlant', component: AddPlant, headerLabel: 'Add Plant' },
     { path: '/plants/updatePlant', component: AddPlant },

@@ -4,7 +4,9 @@
 
         <nav>
             <ul class="nav-items">
-                <nav-item v-for="nav of navItems" :navData="nav" @toggle-component="toggleSelectedComponent"></nav-item>
+                <!-- <nav-item v-for="nav of navItems" :navData="nav" @toggle-component="toggleSelectedComponent"></nav-item> -->
+                <nav-item v-for="nav of routesArr" :navData="nav" @toggle-component="toggleSelectedComponent">
+                </nav-item>
             </ul>
         </nav>
 
@@ -32,15 +34,7 @@ export default {
     components: { NavItem, MobileMenu },
     data() {
         return {
-            navItems: {
-                home: { label: 'Home', componentName: 'PlantList' },
-                plants: { label: 'Plants', componentName: 'PlantList' },
-                addPlant: { label: 'Add Plant', componentName: 'AddPlant' },
-                guide: { label: 'Guide', componentName: 'TheGuide' },
-                blog: { label: 'Blog', componentName: 'TheBlog' },
-                login: { label: 'Login', componentName: 'TheLogin', }
-
-            },
+            routesArr: routesArr.filter(e => e.headerLabel),
             showMobileMenu: false,
         }
     },
