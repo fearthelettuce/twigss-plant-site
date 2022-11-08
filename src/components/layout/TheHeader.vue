@@ -1,20 +1,20 @@
 <template>
- <header id="main-header">
-    <div id="logo"><a href="/">Fear the Lettuce </a></div>
+    <header id="main-header">
+        <div id="logo"><a href="/">Fear the Lettuce </a></div>
 
-    <nav>
-        <ul class="nav-items">
-        <nav-item v-for="nav of navItems" :navData="nav" @toggle-component="toggleSelectedComponent"></nav-item>
-        </ul>
-    </nav>
+        <nav>
+            <ul class="nav-items">
+                <nav-item v-for="nav of navItems" :navData="nav" @toggle-component="toggleSelectedComponent"></nav-item>
+            </ul>
+        </nav>
 
-    <button id="hamburger-menu-btn" @click="toggleMobileMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-</header>
-<!-- <aside>
+        <button id="hamburger-menu-btn" @click="toggleMobileMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+    <!-- <aside>
     <mobile-menu id="mobile-menu" >
         <nav>
             <ul class="nav-items">
@@ -27,45 +27,45 @@
 <script>
 import NavItem from './NavItem.vue'
 import MobileMenu from './MobileMenu.vue'
-
+import { routesArr } from '../../router'
 export default {
-    components: {NavItem, MobileMenu},
+    components: { NavItem, MobileMenu },
     data() {
         return {
             navItems: {
-                home: {label: 'Home', componentName:'PlantList'},
-                plants: {label: 'Plants', componentName:'PlantList'},
-                addPlant: {label: 'Add Plant',componentName: 'AddPlant'},
-                guide: {label: 'Guide', componentName:'TheGuide'},
-                blog: {label: 'Blog',componentName:'TheBlog'},
-                login: {label: 'Login', componentName:'TheLogin',}
+                home: { label: 'Home', componentName: 'PlantList' },
+                plants: { label: 'Plants', componentName: 'PlantList' },
+                addPlant: { label: 'Add Plant', componentName: 'AddPlant' },
+                guide: { label: 'Guide', componentName: 'TheGuide' },
+                blog: { label: 'Blog', componentName: 'TheBlog' },
+                login: { label: 'Login', componentName: 'TheLogin', }
 
             },
             showMobileMenu: false,
         }
     },
     methods: {
-        toggleMobileMenu(){
+        toggleMobileMenu() {
             this.showMobileMenu = !this.showMobileMenu
         },
-        toggleSelectedComponent(cmp){
-            this.$emit('toggle-component',cmp)
+        toggleSelectedComponent(cmp) {
+            this.$emit('toggle-component', cmp)
         },
-    }
+    },
+    mounted() { console.log(routesArr) },
 }
 </script>
 
 <style scoped>
-
 #main-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     max-width: 90rem;
-        height: 5rem;
-        margin: 0 auto;
-        padding: 0 1.5rem;
+    height: 5rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

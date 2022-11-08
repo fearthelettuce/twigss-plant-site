@@ -1,37 +1,22 @@
 <template>
-    <TheHeader @toggle-component="changeSelectedComponent"/>
+    <TheHeader />
     <main>
-      <component :is="selectedComponent" />
+        <router-view></router-view>
     </main>
-  </template>
+</template>
  
 
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue'
-import PlantList from './components/plants/PlantList.vue'
-import AddPlant from './components/plants/AddPlant.vue'
-import TheBlog from './components/blog/TheBlog.vue'
-import TheGuide from './components/guide/TheGuide.vue'
 
-    export default {
-        components: {TheHeader, PlantList, AddPlant, TheBlog, TheGuide},
-        data(){
-            return {selectedComponent: PlantList}
-            
-        },
-        methods: {
-            changeSelectedComponent(cmp){
-                console.log(cmp)
-                this.selectedComponent = cmp
-            }
-        }
-    }
+export default {
+    components: { TheHeader },
+}
 </script>
 
 
 <style >
-
 * {
     box-sizing: border-box;
 }
