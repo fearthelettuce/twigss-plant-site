@@ -10,7 +10,12 @@ async function getOnePlant(plantData) {
 }
 
 async function savePlant(plantData) {
-    return Api().post('/save', plantData)
+    if (plantData.id) {
+        return Api().patch(`/${plantData.id}`)
+    } else {
+        return Api().post('/save', plantData)
+    }
+
 }
 
 async function deletePlant(plantData) {

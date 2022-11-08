@@ -10,11 +10,6 @@ export default {
     props: {
         navData: Object
     },
-    methods: {
-        selectComponent() {
-            this.$emit('toggle-component', this.navData.componentName)
-        },
-    }
 }
 </script>
 

@@ -4,9 +4,7 @@
 
         <nav>
             <ul class="nav-items">
-                <!-- <nav-item v-for="nav of navItems" :navData="nav" @toggle-component="toggleSelectedComponent"></nav-item> -->
-                <nav-item v-for="nav of routesArr" :navData="nav" @toggle-component="toggleSelectedComponent">
-                </nav-item>
+                <nav-item v-for="nav of routesArr" :navData="nav"> </nav-item>
             </ul>
         </nav>
 
@@ -42,11 +40,7 @@ export default {
         toggleMobileMenu() {
             this.showMobileMenu = !this.showMobileMenu
         },
-        toggleSelectedComponent(cmp) {
-            this.$emit('toggle-component', cmp)
-        },
     },
-    mounted() { console.log(routesArr) },
 }
 </script>
 
