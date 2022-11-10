@@ -4,21 +4,21 @@ async function getAllPlants() {
     return Api().get('/plants.json')
 }
 
-async function getOnePlant(plantData) {
-    return Api().get(`/plants/${plantData}.json`)
+async function getOnePlant(plantId) {
+    return Api().get(`/plants/${plantId}.json`)
 }
 
 async function savePlant(plantData) {
 
     if (plantData.id) {
-        return Api().patch(`plants/${plantData.id}.json`, plantData)
+        return Api().patch(`/plants/${plantData.id}.json`, plantData)
     } else {
         return Api().post('/plants.json', plantData)
     }
 }
 
 async function deletePlant(plantId) {
-    return Api().delete(`plants/${plantId}.json`)
+    return Api().delete(`/plants/${plantId}.json`)
 }
 
 

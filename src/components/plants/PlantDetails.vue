@@ -34,7 +34,7 @@ export default {
                 temps: {
                     Intermediate: 'Plants grow well at a wide range of temperatures and do not require a significant temp drop at night. (58-70F at night, 70-80F during the day)',
                     Highland: 'Plants require a significant temp drop at night and will need active cooling to thrive. (50F-62F lows at night, 70-80F during the day) ',
-                    Room: 'Plants grow well at normal room temperatures (68-80F).',
+                    RoomTemp: 'Plants grow well at normal room temperatures (68-80F).',
                     Lowland: 'Plants need warm conditions to thrive, may require heating.',
                     Other: 'Plants have some other temperature requirement.',
                 }
@@ -60,7 +60,7 @@ export default {
     methods: {
         getPlantDetails(plantId) {
             backend.getOnePlant(plantId).then((response) => {
-                if (response.status === 200) { this.plantData = response.data }
+                if (response.status === 200) { this.plantData = response.data; console.log(this.plantData) }
             }).catch((error) => { console.error(error); alert('something went wrongo dongo') })
         }
     }

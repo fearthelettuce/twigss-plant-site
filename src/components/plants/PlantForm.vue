@@ -6,9 +6,8 @@
       <section name="plant-info" class="form-group">
         <h2>Plant Info</h2>
         <div class="form-control med">
-          <label for="plant-name">Plant Name</label>
-          <input id="plant-name" name="plant-name" type="text" v-model.trim="enteredInfo.name"
-            @blur="autoSelectGenus($event)" />
+          <label for="name">Plant Name</label>
+          <input id="name" name="name" type="text" v-model.trim="enteredInfo.name" @blur="autoSelectGenus($event)" />
         </div>
         <div class="form-control long">
           <label for="shortDescription">Description</label>
@@ -18,9 +17,6 @@
           <label for="genus">Genus</label>
           <select id="genus" name="genus" v-model="enteredInfo.genus">
             <option v-for="item of genusList">{{ item.label }}</option>
-            <!-- <option value="Nepenthes">Nepenthes</option>
-        <option value="Heliamphora">Heliamphora</option>
-        <option value="Cephalotus">Cephalotus</option> -->
           </select>
         </div>
       </section>
@@ -36,7 +32,7 @@
           <select id="careConditions" name="careConditions" v-model="enteredInfo.careConditions">
             <option value="Intermediate">Intermediate</option>
             <option value="Highland">Highland</option>
-            <option value="Room Temp">Room Temp</option>
+            <option value="RoomTemp">Room Temp</option>
             <option value="Lowland">Lowland</option>
             <option value="Other">Other</option>
           </select>
@@ -69,15 +65,16 @@
           <label for="photoUrl">Photo Url</label>
           <input id="photoUrl" name="photoUrl" type="URL" v-model="enteredInfo.photoUrl" />
         </div>
+        <img :src="enteredInfo.photoUrl">
       </section>
       <div>
         <button @click="savePlant">Save Data</button>
-        <button @click="saveAndExit">Save Data</button>
+        <button @click="saveAndExit">Save & Exit</button>
 
-        <p v-if="showSuccessMessage">Plant succesfully saved!</p>
+        <p v-if="showSuccessMessage">Plant successfully saved!</p>
       </div>
       <div>
-        <button v-if="plantData.id" @click="deletePlant(plantData.id)">Delete Plant</button>
+        <button v-if="id" @click="deletePlant(id)">Delete Plant</button>
 
         <p v-if="showDeleteMessage">Plant succesfully deleted!</p>
       </div>
@@ -87,9 +84,7 @@
 <script>
 import backend from '@/services/firebaseApi'
 export default {
-  props: {
-    plantData: Object
-  },
+  props: ['id'],
   data() {
     return {
       enteredInfo: {
@@ -107,7 +102,6 @@ export default {
       genusList: [
         {
           label: 'Nepenthes',
-          care: 'Intermediate - highland'
         },
         {
           label: 'Heliamphora',
@@ -115,7 +109,7 @@ export default {
         },
         {
           label: 'Cephalotus',
-          care: 'Room temp'
+          careConditions: 'RoomTemp'
         }
       ],
       showSuccessMessage: false,
@@ -125,25 +119,29 @@ export default {
   methods: {
     savePlant(event) {
       const plant = this.enteredInfo
+      if (this.id) {
+        plant.id = this.id
+      }
       backend.savePlant(plant).then((response) => {
-        console.log(response)
         if (response.status == 200) {
           this.showSuccessMessage = true;
-          setTimeout(() => { this.showSuccessMessage = false; }, 3000)
+          setTimeout(() => { this.showSuccessMessage = false; }, 2500)
         }
-        this.resetForm();
       }).catch((err) => { console.log(err); alert('Something went wrong') })
     },
+
     saveAndExit(event) {
-      this.savePlant(event);
+      this.savePlant(event)
       this.$router.push('/');
+
+      // TODO - when saving a new plant and going back to PlantList, the list isn't updated with the new plant.  
     },
+
     deletePlant(plantId) {
       backend.deletePlant(plantId).then((response) => {
         if (response.status == 200) {
           this.showDeleteMessage = true;
-          setTimeout(() => { this.showDeleteMessage = false; this.$router.push('/'); }, 1500)
-
+          setTimeout(() => { this.showDeleteMessage = false; this.$router.push('/'); }, 600)
           this.$emit('refresh-plants')
         }
       }).catch((error) => {
@@ -151,17 +149,22 @@ export default {
         alert('something went wrongo dongo')
       })
     },
+
     autoSelectGenus(event) {
       let enteredName = event.target.value
       if (!this.enteredInfo.genus) {
         for (let item of this.genusList) {
           if (enteredName.includes(item.label)) {
             this.enteredInfo.genus = item.label
+            if (item.careConditions) {
+              this.enteredInfo.careConditions = item.careConditions
+            }
             return;
           }
         }
       }
     },
+
     resetForm() {
       this.enteredInfo = {
         name: '',
@@ -177,24 +180,19 @@ export default {
       }
     },
 
-    populatePlantData() {
-      if (this.plantData) {
-        this.enteredInfo = this.plantData
-      }
+    getPlantDetails(plantId) {
+      backend.getOnePlant(plantId).then((response) => {
+        if (response.status === 200) { this.enteredInfo = response.data }
+      }).catch((error) => { console.error(error); alert('something went wrongo dongo') })
     },
-  },
-  created() {
-    const id = this.$route.params.id;
-    console.log(this.plants)
-    if (id) {
-      const selectedPlant = this.plants.find(plant => plant.id === id)
-      this.enteredInfo = selectedPlant
 
-    }
   },
-  // mounted() {
-  //   this.populatePlantData()
-  // }
+
+  created() {
+    if (this.$route.params.id) {
+      this.getPlantDetails(this.$route.params.id)
+    }
+  }
 }
 </script>
 
@@ -220,6 +218,10 @@ textarea:focus {
   outline: none;
   border-color: #3a0061;
   background-color: #f7ebff;
+}
+
+img {
+  height: 30em;
 }
 
 .container {
