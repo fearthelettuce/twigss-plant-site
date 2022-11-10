@@ -5,7 +5,7 @@ async function getAllPlants() {
 }
 
 async function getOnePlant(plantData) {
-    return Api().get(`/${plantData.id}`)
+    return Api().get(`/plants/${plantData}.json`)
 }
 
 async function savePlant(plantData) {

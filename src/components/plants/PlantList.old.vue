@@ -1,12 +1,12 @@
 <template>
-        <p v-if="isLoading">Loading...</p>
-        <div class="container">
+    <p v-if="isLoading">Loading...</p>
+    <div class="container">
         <div class="card-wrap-outer">
-        <div class="card-wrap-inner">
-            <plant-card v-for="plant of plants" :plant-data="plant" @refresh-plants="getPlants"></plant-card>
+            <div class="card-wrap-inner">
+                <plant-card v-for="plant of plants" :plant-data="plant" @refresh-plants="getPlants"></plant-card>
+            </div>
         </div>
-        </div>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ import PlantCard from './PlantCard.vue'
 import PlantForm from './PlantForm.vue'
 import backend from '@/services/firebaseApi'
 export default {
-    components: {PlantCard, PlantForm},
+    components: { PlantCard, PlantForm },
 
     data() {
         return {
@@ -24,9 +24,9 @@ export default {
 
     },
     methods: {
-        getPlants(){
+        getPlants() {
             this.isLoading = true
-            backend.getAllPlants().then((response)=>{
+            backend.getAllPlants().then((response) => {
                 let data = response.data
                 const results = [];
                 console.log(data)
@@ -39,7 +39,7 @@ export default {
                 this.plants = results;
                 //console.log(this.plants)
 
-            }).catch((error)=>{
+            }).catch((error) => {
                 console.log(error)
                 this.isLoading = false;
                 alert('something went wrongo dongo')
@@ -54,11 +54,12 @@ export default {
 
 <style>
 .container {
-  width: 100%;
-  max-width: 960px;
-  margin: 30px auto;
-  flex-wrap: wrap;
+    width: 100%;
+
+    margin: 20px auto;
+    flex-wrap: wrap;
 }
+
 .card-grid {
     display: flex;
     flex-direction: row;
@@ -67,19 +68,19 @@ export default {
 }
 
 .card-wrap-outer {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            width: 100%;
-            
-        }
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+}
 
 .card-wrap-inner {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            flex-wrap: wrap;
-        }
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
 
 /* @media (min-width: 480px) {
 

@@ -50,7 +50,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    max-width: 90rem;
+    max-width: 110rem;
     height: 5rem;
     margin: 0 auto;
     padding: 0 1.5rem;

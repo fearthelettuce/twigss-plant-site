@@ -1,7 +1,7 @@
 <template>
     <li>
-        <a :href="navData.path">{{ navData.headerLabel }}</a>
-
+        <!-- <a :href="navData.path">{{ navData.headerLabel }}</a> -->
+        <router-link :to="navData.path">{{ navData.headerLabel }}</router-link>
     </li>
 </template>
 <!-- //TODO: add logic to only show options for authorized user - navData.isAuthorized navData.isLoggedIn navData.isAdmin -->
@@ -19,6 +19,7 @@ li {
 }
 
 a {
+    text-decoration: none;
     cursor: pointer;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -27,7 +28,8 @@ a {
 }
 
 a:hover,
-a:active {
+a:active,
+a.router-link-active {
     background-color: rgb(63, 60, 58);
 }
 </style>

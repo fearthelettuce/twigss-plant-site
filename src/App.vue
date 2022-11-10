@@ -32,8 +32,8 @@ body {
 }
 
 main {
-    width: 90%;
-    max-width: 80rem;
+    width: 100%;
+    max-width: 110rem;
     margin: 0 auto;
 }
 
@@ -53,39 +53,14 @@ ol {
     padding: 0;
 }
 
-a {
+a,
+a:visited {
     text-decoration: none;
-    color: rgb(0, 119, 170);
+    color: inherit;
 }
 
 header a {
-    color: rgb(212, 120, 14);
-}
-
-
-.alert {
-    background-color: var(--color-error-100);
-    border-radius: var(--border-radius-small);
-    color: var(--color-error-500);
-    padding: var(--space-4);
-}
-
-.alert h2 {
-    font-size: 1rem;
-    margin: var(--space-2) 0;
-    text-transform: uppercase;
-}
-
-.alert p {
-    margin: var(--space-2) 0;
-}
-
-.badge {
-    margin-left: var(--space-2);
-    padding: 0.15rem var(--space-4);
-    border-radius: 10rem;
-    background-color: var(--color-primary-500);
-    color: var(--color-primary-500-contrast);
+    color: rgb(103, 202, 37);
 }
 
 .currency::before {

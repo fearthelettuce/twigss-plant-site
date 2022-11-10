@@ -5,6 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "serve": "vite serve",
     "test:unit": "vitest --environment jsdom --root src/"
   },
   "dependencies": {

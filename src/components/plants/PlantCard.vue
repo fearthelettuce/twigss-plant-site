@@ -1,22 +1,29 @@
-<template>    
+<template>
     <div class="card">
-            <img :src="plantData.photoUrl">
+        <img :src="plantData.photoUrl">
         <div class="card-item">
-            <h2>{{plantData.name}}</h2>
+            <h2>{{ plantData.name }}</h2>
         </div>
         <div class="card-sub">
-            <p class="currency">{{plantData.salePrice}}</p>
+            <p class="currency">{{ plantData.salePrice }}</p>
         </div>
         <div class="card-item flexible">
-            <p>{{shortDescrDisplay}}</p>
+            <p>{{ shortDescrDisplay }}</p>
         </div>
         <div class="card-footer">
-      <base-button mode="outline" :plantData="plantData" @click="showForm">View Details</base-button>
+            <router-link :to="'/plants/' + plantData.id">
+                <base-button mode="outline" :plantData="plantData">View Details</base-button>
+            </router-link>
+            <router-link v-if="isAdmin" :to="'/plants/update/' + plantData.id">
+                <base-button mode="outline" :plantData="plantData">Edit Details</base-button>
+            </router-link>
+            <router-link v-else :to="'/plants/update/' + plantData.id">
+                <base-button mode="outline" :plantData="plantData">Add to Cart</base-button>
+            </router-link>
 
-      <base-button mode="outline" >Add to Cart</base-button>
+        </div>
     </div>
-    </div>
-    
+
     <PlantForm :plantData="plantData" v-if="showDummyForm" />
 </template>
 
@@ -24,27 +31,28 @@
 import BaseCard from '../UI/BaseCard.vue'
 import PlantForm from './PlantForm.vue'
 export default {
-    components: {BaseCard, PlantForm},
+    components: { BaseCard, PlantForm },
     props: ['plantData'],
     computed: {
-        shortDescrDisplay(){return this.strLimit(this.plantData.shortDescription,120)} 
+        shortDescrDisplay() { return this.strLimit(this.plantData.shortDescription, 120) }
     },
-    data(){
+    data() {
         return {
-            showDummyForm: false
+            showDummyForm: false,
+            isAdmin: true,
         }
     },
     methods: {
         strLimit(str, size) {
-            if (!str){return ''};
+            if (!str) { return '' };
             str = str.toString();
 
             if (str.length <= size) {
-            return str;
+                return str;
             }
             return str.substr(0, size) + '...';
         },
-        showForm(){
+        showForm() {
             this.showDummyForm = true
         }
     }
@@ -52,11 +60,11 @@ export default {
 </script>
 
 <style scoped>
-
 img {
     width: 100%;
     display: block;
-    height: 20em;
+    height: 25em;
+    object-fit: cover;
 }
 
 .card {
@@ -64,16 +72,16 @@ img {
     display: flex;
     flex-direction: column;
     width: 100%;
-    flex-basis: 30%
+    flex-basis: 24%
 }
 
 .card-item {
-        padding: 8px 14px 8px 14px;
-    }
+    padding: 8px 14px 8px 14px;
+}
 
 .card-sub {
-        padding: 0 8px;
-    }
+    padding: 0 8px;
+}
 
 .card-footer {
     padding: 18px;
@@ -81,8 +89,9 @@ img {
     border-top: 1px solid #dedede;
     display: flex;
     justify-content: space-between;
-    }
+}
 
 .flexible {
     flex-grow: 1;
-}</style>
+}
+</style>
