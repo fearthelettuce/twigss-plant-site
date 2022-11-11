@@ -54,6 +54,7 @@ export default {
         },
         filterPlants(genus) {
             let filteredPlants = [];
+            alert(genus)
 
 
             this.plants = filteredPlants

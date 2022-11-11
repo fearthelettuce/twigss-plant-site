@@ -16,6 +16,7 @@ export default {
     },
     methods: {
         filterGenus(genus) {
+            console.log(genus)
             this.$emit('filter-genus', genus)
         }
     },
