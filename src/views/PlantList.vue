@@ -56,9 +56,7 @@ export default {
         },
         filterPlants(selectedGenus) {
             let filteredPlants = [];
-            console.log(selectedGenus)
             filteredPlants = this.plants.filter(plant => plant.genus === selectedGenus)
-            console.log(filteredPlants)
             this.displayPlants = filteredPlants
         }
     },
