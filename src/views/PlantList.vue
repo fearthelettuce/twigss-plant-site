@@ -1,6 +1,6 @@
 <template>
     <p v-if="isLoading">Loading...</p>
-    <ProductFilter @filter-genus="filterPlants($event)" />
+    <ProductFilter @filter-genus="filterPlants($event)" @clear-filter="clearFilter" />
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
@@ -33,7 +33,7 @@ export default {
         }
     },
     methods: {
-        getPlants() {
+        async getPlants() {
             this.isLoading = true
             backend.getAllPlants().then((response) => {
                 let data = response.data
@@ -46,7 +46,6 @@ export default {
                 this.isLoading = false;
                 this.plants = results;
                 this.displayPlants = results;
-                //console.log(this.plants)
 
             }).catch((error) => {
                 console.log(error)
@@ -58,7 +57,10 @@ export default {
             let filteredPlants = [];
             filteredPlants = this.plants.filter(plant => plant.genus === selectedGenus)
             this.displayPlants = filteredPlants
-        }
+        },
+        clearFilter() {
+            this.displayPlants = this.plants
+        },
     },
     created() {
         this.getPlants()

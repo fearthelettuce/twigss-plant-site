@@ -3,6 +3,7 @@
         <li v-for="genus of genusList">
             <BaseButton @click="filterGenus(genus.label)">{{ genus.label }}</BaseButton>
         </li>
+        <BaseButton @click="clearFilter()">Clear Filter</BaseButton>
     </ul>
 </template>
 
@@ -15,14 +16,11 @@ export default {
         }
     },
     methods: {
-<<<<<<< HEAD
         filterGenus(selectedGenus) {
             this.$emit('filter-genus', selectedGenus)
-=======
-        filterGenus(genus) {
-            console.log(genus)
-            this.$emit('filter-genus', genus)
->>>>>>> a3cd4130181b92ac454fabb7f83ce2923857783d
+        },
+        clearFilter() {
+            this.$emit('clear-filter')
         }
     },
 }

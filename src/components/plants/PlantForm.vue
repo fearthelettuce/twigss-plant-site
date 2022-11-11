@@ -4,25 +4,32 @@
   <div class="container">
     <form @submit.prevent="submitForm">
       <section name="plant-info" class="form-group">
-        <h2>Plant Info</h2>
-        <div class="form-control med">
-          <label for="name">Plant Name</label>
-          <input id="name" name="name" type="text" v-model.trim="enteredInfo.name" @blur="autoSelectGenus($event)" />
+        <div class="section-header">
+          <h2>Plant Info</h2>
         </div>
-        <div class="form-control long">
-          <label for="shortDescription">Description</label>
-          <input id="shortDescription" name="shortDescription" type="text" v-model="enteredInfo.shortDescription" />
-        </div>
-        <div class="form-control med">
-          <label for="genus">Genus</label>
-          <select id="genus" name="genus" v-model="enteredInfo.genus">
-            <option v-for="item of genusList">{{ item.label }}</option>
-          </select>
+
+        <div class="section-content">
+          <div class="form-control med">
+            <label for="name">Plant Name</label>
+            <input id="name" name="name" type="text" v-model.trim="enteredInfo.name" @blur="autoSelectGenus($event)" />
+          </div>
+          <div class="form-control long">
+            <label for="shortDescription">Description</label>
+            <input id="shortDescription" name="shortDescription" type="text" v-model="enteredInfo.shortDescription" />
+          </div>
+          <div class="form-control med">
+            <label for="genus">Genus</label>
+            <select id="genus" name="genus" v-model="enteredInfo.genus">
+              <option v-for="item of genusList">{{ item.label }}</option>
+            </select>
+          </div>
         </div>
       </section>
 
       <section name="care-info" class="form-group">
-        <h2>Care</h2>
+        <div class="section-header">
+          <h2>Care</h2>
+        </div>
         <div class="form-control med">
           <label for="careDifficulty">Care Difficulty</label>
           <input id="careDifficulty" name="careDifficulty" type="number" v-model="enteredInfo.careDifficulty" />
@@ -40,7 +47,9 @@
       </section>
 
       <section name="selling-info" class="form-group">
-        <h2>Selling</h2>
+        <div class="section-header">
+          <h2>Selling</h2>
+        </div>
         <div class="form-control">
           <label for="availableForSale">availableForSale</label>
           <input id="availableForSale" name="availableForSale" type="checkbox"
@@ -216,7 +225,10 @@ img {
 
 .container {
   flex-wrap: wrap;
+}
 
+.section-header {
+  width: 100%;
 }
 
 .form-group {
