@@ -15,8 +15,8 @@ export default {
         }
     },
     methods: {
-        filterGenus(genus) {
-            this.$emit('filter-genus', genus)
+        filterGenus(selectedGenus) {
+            this.$emit('filter-genus', selectedGenus)
         }
     },
 }

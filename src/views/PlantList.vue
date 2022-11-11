@@ -1,10 +1,10 @@
 <template>
     <p v-if="isLoading">Loading...</p>
-    <ProductFilter @filter-genus="filterPlants(genus)" />
+    <ProductFilter @filter-genus="filterPlants($event)" />
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
-                <plant-card v-for="plant of plants" :plant-data="plant"></plant-card>
+                <plant-card v-for="plant of displayPlants" :plant-data="plant"></plant-card>
             </div>
         </div>
     </div>
@@ -22,6 +22,7 @@ export default {
     data() {
         return {
             plants: [],
+            displayPlants: [],
             isLoading: false,
         }
     },
@@ -44,6 +45,7 @@ export default {
                 }
                 this.isLoading = false;
                 this.plants = results;
+                this.displayPlants = results;
                 //console.log(this.plants)
 
             }).catch((error) => {
@@ -52,11 +54,12 @@ export default {
                 alert('something went wrongo dongo')
             })
         },
-        filterPlants(genus) {
+        filterPlants(selectedGenus) {
             let filteredPlants = [];
-
-
-            this.plants = filteredPlants
+            console.log(selectedGenus)
+            filteredPlants = this.plants.filter(plant => plant.genus === selectedGenus)
+            console.log(filteredPlants)
+            this.displayPlants = filteredPlants
         }
     },
     created() {
