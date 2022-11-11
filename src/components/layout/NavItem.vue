@@ -34,4 +34,8 @@ a:active,
 a.router-link-active {
     background-color: rgb(63, 60, 58);
 }
+
+a:active {
+    transform: scale(0.96);
+}
 </style>

@@ -1,9 +1,11 @@
 <template>
     <ul>
         <li v-for="genus of genusList">
-            <BaseButton @click="filterGenus(genus.label)">{{ genus.label }}</BaseButton>
+            <BaseButton @click="filterGenus(genus.label)" :key="genus.label" :mode="clicked ? 'outline' : ''">
+                {{ genus.label }}
+            </BaseButton>
         </li>
-        <BaseButton @click="clearFilter()">Clear Filter</BaseButton>
+        <BaseButton @click="clearFilter()" mode="flat">Clear Filter</BaseButton>
     </ul>
 </template>
 
@@ -13,10 +15,12 @@ export default {
     data() {
         return {
             genusList: genusData,
+            clicked: false,
         }
     },
     methods: {
         filterGenus(selectedGenus) {
+            this.clicked = !this.clicked
             this.$emit('filter-genus', selectedGenus)
         },
         clearFilter() {
@@ -29,5 +33,9 @@ export default {
 ul {
     display: flex;
     flex-direction: row;
+}
+
+li {
+    padding: 0 4px
 }
 </style>

@@ -22,14 +22,21 @@ export default {
     data() {
         return {
             plants: [],
-            displayPlants: [],
             isLoading: false,
+            genusFilterExclude: [],
         }
     },
     provide() {
         return {
             plants: this.plants,
 
+        }
+    },
+    computed: {
+        displayPlants() {
+            let filteredPlants = []
+            filteredPlants = this.plants.filter(plant => !this.genusFilterExclude.includes(plant.genus))
+            return filteredPlants
         }
     },
     methods: {
@@ -45,7 +52,6 @@ export default {
                 }
                 this.isLoading = false;
                 this.plants = results;
-                this.displayPlants = results;
 
             }).catch((error) => {
                 console.log(error)
@@ -53,14 +59,26 @@ export default {
                 alert('something went wrongo dongo')
             })
         },
+        // filterPlants(selectedGenus) {
+        //     let filteredPlants = [];
+        //     filteredPlants = this.plants.filter(plant => plant.genus === selectedGenus)
+        //     this.displayPlants = filteredPlants
+        // },
         filterPlants(selectedGenus) {
-            let filteredPlants = [];
-            filteredPlants = this.plants.filter(plant => plant.genus === selectedGenus)
-            this.displayPlants = filteredPlants
+            if (!this.genusFilterExclude.includes(selectedGenus)) {
+                this.genusFilterExclude.push(selectedGenus)
+            } else {
+                console.log(this.genusFilterExclude)
+                let index = this.genusFilterExclude.findIndex(element => element == selectedGenus)
+                console.log(index)
+                this.genusFilterExclude.splice(index, 1)
+            }
+
         },
-        clearFilter() {
-            this.displayPlants = this.plants
-        },
+        // clearFilter() {
+        //     this.displayPlants = this.plants
+        // },
+        clearFilter() { this.genusFilterExclude = [] }
     },
     created() {
         this.getPlants()

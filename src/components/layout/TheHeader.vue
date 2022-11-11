@@ -57,8 +57,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgb(212, 136, 14);
+    border-bottom: 1px solid rgb(103, 202, 37);
     background-color: rgb(37, 34, 31);
+    margin-bottom: 15px;
 }
 
 #logo a {

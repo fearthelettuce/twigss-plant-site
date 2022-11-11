@@ -13,16 +13,18 @@
             <label for="name">Plant Name</label>
             <input id="name" name="name" type="text" v-model.trim="enteredInfo.name" @blur="autoSelectGenus($event)" />
           </div>
-          <div class="form-control long">
-            <label for="shortDescription">Description</label>
-            <input id="shortDescription" name="shortDescription" type="text" v-model="enteredInfo.shortDescription" />
-          </div>
-          <div class="form-control med">
+          <div class="form-control small">
             <label for="genus">Genus</label>
             <select id="genus" name="genus" v-model="enteredInfo.genus">
               <option v-for="item of genusList">{{ item.label }}</option>
             </select>
           </div>
+          <div class="form-control long">
+            <label for="shortDescription">Description</label>
+            <textarea id="shortDescription" name="shortDescription" type="textarea" rows="3"
+              v-model="enteredInfo.shortDescription" />
+          </div>
+
         </div>
       </section>
 
@@ -30,19 +32,22 @@
         <div class="section-header">
           <h2>Care</h2>
         </div>
-        <div class="form-control med">
-          <label for="careDifficulty">Care Difficulty</label>
-          <input id="careDifficulty" name="careDifficulty" type="number" v-model="enteredInfo.careDifficulty" />
-        </div>
-        <div class="form-control">
-          <label for="careConditions med">Care Conditions</label>
-          <select id="careConditions" name="careConditions" v-model="enteredInfo.careConditions">
-            <option value="Intermediate">Intermediate</option>
-            <option value="Highland">Highland</option>
-            <option value="RoomTemp">Room Temp</option>
-            <option value="Lowland">Lowland</option>
-            <option value="Other">Other</option>
-          </select>
+
+        <div class="section-content">
+          <div class="form-control small">
+            <label for="careDifficulty">Care Difficulty</label>
+            <input id="careDifficulty" name="careDifficulty" type="number" v-model="enteredInfo.careDifficulty" />
+          </div>
+          <div class="form-control small">
+            <label for="careConditions small">Care Conditions</label>
+            <select id="careConditions" name="careConditions" v-model="enteredInfo.careConditions">
+              <option value="Intermediate">Intermediate</option>
+              <option value="Highland">Highland</option>
+              <option value="RoomTemp">Room Temp</option>
+              <option value="Lowland">Lowland</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
       </section>
 
@@ -50,31 +55,35 @@
         <div class="section-header">
           <h2>Selling</h2>
         </div>
-        <div class="form-control">
-          <label for="availableForSale">availableForSale</label>
-          <input id="availableForSale" name="availableForSale" type="checkbox"
-            v-model.trim="enteredInfo.availableForSale" />
+        <div class="section-content">
+          <div class="form-control">
+            <label for="availableForSale">For Sale</label>
+            <input id="availableForSale" name="availableForSale" type="checkbox"
+              v-model.trim="enteredInfo.availableForSale" />
+          </div>
+
+          <div class="form-control small">
+            <label for="salePrice">Sale Price</label>
+            <input id="salePrice" name="salePrice" type="number" v-model="enteredInfo.salePrice" />
+          </div>
+          <div class="form-control small">
+            <label for="size">Size</label>
+            <input id="size" name="size" type="text" v-model="enteredInfo.size" />
+          </div>
+          <div class="form-control small">
+            <label for="quantity">Quantity</label>
+            <input id="quantity" name="quantity" type="number" v-model="enteredInfo.quantity" />
+          </div>
+          <div class="form-control long">
+            <label for="photoUrl">Photo Url</label>
+            <input id="photoUrl" name="photoUrl" type="URL" v-model="enteredInfo.photoUrl" />
+          </div>
         </div>
 
-        <div class="form-control">
-          <label for="salePrice">Sale Price</label>
-          <input id="salePrice" name="salePrice" type="number" v-model="enteredInfo.salePrice" />
+        <div>
+          <h2>Image Preview</h2>
+          <img :src="enteredInfo.photoUrl">
         </div>
-      </section>
-      <section name="inventory-info" class="form-group">
-        <div class="form-control">
-          <label for="size">Size</label>
-          <input id="size" name="size" type="text" v-model="enteredInfo.size" />
-        </div>
-        <div class="form-control">
-          <label for="quantity">Quantity</label>
-          <input id="quantity" name="quantity" type="number" v-model="enteredInfo.quantity" />
-        </div>
-        <div class="form-control">
-          <label for="photoUrl">Photo Url</label>
-          <input id="photoUrl" name="photoUrl" type="URL" v-model="enteredInfo.photoUrl" />
-        </div>
-        <img :src="enteredInfo.photoUrl">
       </section>
       <div>
         <button @click="savePlant">Save Data</button>
@@ -150,13 +159,13 @@ export default {
     },
 
     autoSelectGenus(event) {
-      let enteredName = event.target.value
+      let enteredName = event.target.value.toLowerCase()
       if (!this.enteredInfo.genus) {
-        for (let item of this.genusList) {
-          if (enteredName.includes(item.label)) {
-            this.enteredInfo.genus = item.label
-            if (item.careConditions) {
-              this.enteredInfo.careConditions = item.careConditions
+        for (let item in this.genusList) {
+          if (enteredName.includes(this.genusList[item].label.toLowerCase())) {
+            this.enteredInfo.genus = this.genusList[item].label
+            if (this.genusList[item].careConditions) {
+              this.enteredInfo.careConditions = this.genusList[item].careConditions
             }
             return;
           }
@@ -206,10 +215,10 @@ input,
 textarea,
 select {
   display: block;
-  width: 100%;
   font: inherit;
   padding: 0.15rem;
   border: 1px solid #ccc;
+  width: 95%
 }
 
 input:focus,
@@ -231,48 +240,37 @@ img {
   width: 100%;
 }
 
-.form-group {
+.section-content {
   display: flex;
   flex-direction: row;
 }
 
-.form-group input {
-  flex: 1 1 auto;
-  display: block;
+.section-content [type="textarea"] {
+  width: 70%
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 .form-control {
   margin: 1rem 0;
   padding: 2px 2px;
+
+}
+
+.small {
+  flex-grow: 1
 }
 
 .med {
-  flex-basis: 30%;
+  flex-grow: 2
 }
 
 .long {
-  flex-basis: 90%;
+  flex-grow: 4
 }
-
-/* 
-form hr {
-    border-color: var(--color-primary-200);
-    margin: var(--space-2);
-
-}
-
-label {
-    color: var(--color-gray-100);
-    display: block;
-    margin-bottom: var(--space-1);
-}
-
-input,
-textarea {
-    font: inherit;
-    padding: var(--space-2);
-    border-radius: var(--border-radius-small);
-    border: none;
-    width: 90%;
-} */
 </style>

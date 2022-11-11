@@ -7,30 +7,40 @@
 <script>
 export default {
   props: ['type', 'mode']
-}</script>
+}
+</script>
   
 <style scoped>
 button {
   padding: 0.75rem 1.5rem;
   font-family: inherit;
-  background-color: rgb(223, 159, 41);
-  border: 1px solid rgb(223, 159, 41);
+  background-color: rgb(103, 202, 37);
+  border: 1px solid rgb(103, 202, 37);
   color: white;
   cursor: pointer;
 }
 
-
 button:hover,
 button:active {
-  background-color: rgb(223, 150, 34);
-  border-color: rgb(223, 150, 34);
+  background-color: #97e627;
+  border-color: #97e627;
   color: white;
+}
+
+button:active {
+  transform: scale(0.96);
 }
 
 .flat {
   background-color: transparent;
-  color: rgb(212, 120, 14);
+  color: rgb(103, 202, 37);
   border: none;
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid rgb(103, 202, 37);
+  color: rgb(103, 202, 37);
 }
 
 .outline:hover,
@@ -40,28 +50,8 @@ button:active {
   color: white;
 }
 
-.outline {
-  background-color: transparent;
-  border: 1px solid rgb(103, 202, 37);
-  color: rgb(103, 202, 37);
-}
-
 .flat:hover,
 .flat:active {
-  background-color: #edd2ff;
-}
-
-
-
-
-
-.btn-alt {
-  background-color: transparent;
-  color: rgb(212, 120, 14);
-}
-
-.btn-alt:hover,
-.btn-alt:active {
-  background-color: rgb(212, 120, 14);
+  background-color: #97e627;
 }
 </style>
