@@ -64,6 +64,7 @@ export default {
 #logo a {
     font-weight: bold;
     font-size: 2rem;
+    color: rgb(103, 202, 37);
 }
 
 #main-header nav {

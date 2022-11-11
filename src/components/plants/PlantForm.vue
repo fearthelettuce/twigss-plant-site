@@ -76,13 +76,14 @@
       <div>
         <button v-if="id" @click="deletePlant(id)">Delete Plant</button>
 
-        <p v-if="showDeleteMessage">Plant succesfully deleted!</p>
+        <p v-if="showDeleteMessage">Plant successfully deleted!</p>
       </div>
     </form>
   </div>
 </template>
 <script>
 import backend from '@/services/firebaseApi'
+import genusData from '@/services/plantList'
 export default {
   props: ['id'],
   data() {
@@ -99,19 +100,8 @@ export default {
         salePrice: 0,
         photoUrl: '',
       },
-      genusList: [
-        {
-          label: 'Nepenthes',
-        },
-        {
-          label: 'Heliamphora',
-          care: 'Intermediate'
-        },
-        {
-          label: 'Cephalotus',
-          careConditions: 'RoomTemp'
-        }
-      ],
+      genusList: genusData,
+
       showSuccessMessage: false,
       showDeleteMessage: false,
     }

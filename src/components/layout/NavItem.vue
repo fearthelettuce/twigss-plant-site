@@ -18,13 +18,15 @@ li {
     margin: 0 0.5rem;
 }
 
-a {
+a,
+a:visited {
     text-decoration: none;
     cursor: pointer;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     flex-wrap: nowrap;
     display: block;
+    color: rgb(103, 202, 37);
 }
 
 a:hover,

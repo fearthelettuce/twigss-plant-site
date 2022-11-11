@@ -18,6 +18,25 @@
     </p>
 
 
+    <p>
+    <h1>eBay Heli</h1>
+    This auction is for a Heliamphora pulchella division. This division was taken in the spring of 2022 and is well
+    established, rooted and making new pitchers. I have multiple plants available, the plant in the photo is one of them
+    but
+    may not be the actual plant you receive. All plants will be this size or larger.
+
+
+    The plant will be shipped potted. If the plant arrives with any significant damage or you have any reason to believe
+    it
+    was exposed to extreme heat or cold, please contact me as soon as possible.
+
+
+    I'm happy to answer any questions about the plant or growing conditions. This species is easy to grow, maybe not a
+    great
+    idea as your first Heliamphora but if you can care for H. minor, you can grow this species.
+
+    </p>
+
     <h1>Facebook</h1>
     <p>Several rooted cuttings and divisions available. Photos are representative of the plants available. Photos of the
         adult
