@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="genus of genusList" :key="genus.label">
-            <BaseButton @click="filterGenus(genus.label)"  :mode="genusClicked.clicked ? 'outline' : ''">
+            <BaseButton @click="filterGenus(genus.label)"  :mode="isSelected(genus.label) ? 'outline' :''">
                 {{ genus.label }}
             </BaseButton>
         </li>
@@ -10,15 +10,15 @@
 </template>
 
 <script>
-import genusData from '@/services/plantList'
+import productData from '@/services/plantList'
 export default {
     data() {
         return {
-            genusList: genusData,
-            clicked: false,
-            clickedGenus: '',
+            genusList: productData,
+            selProduct: []
         }
     },
+
     computed: {
         genusClicked(){
             console.log(this.genusList)
@@ -29,22 +29,23 @@ export default {
                 theGenus.clicked = this.clicked
                 theGenus.style = 'flat'
             } 
-            //console.log(theGenus)
-            //theGenus.clicked = true
-            //console.log(clickTrackerObj)
-            // theGenus.clicked = true
-            // console.log(theGenus)
             return theGenus
         }
     },
     methods: {
+        isSelected(selectedGenus) {
+            return this.selProduct.includes(selectedGenus)
+        },
         filterGenus(selectedGenus) {
-            this.clickedGenus = selectedGenus
-            this.clicked = !this.clicked //filter not correctly toggling button styles
+            if (this.isSelected(selectedGenus)) {
+                this.selProduct = this.selProduct.filter(s => s !== selectedGenus)
+            } else {
+                this.selProduct = [...this.selProduct, selectedGenus]
+            }
             this.$emit('filter-genus', selectedGenus)
-            console.log(this.genusClicked.clicked)
         },
         clearFilter() {
+            this.selProduct = []
             this.$emit('clear-filter')
         }
     },
