@@ -68,9 +68,7 @@ export default {
             if (!this.genusFilterExclude.includes(selectedGenus)) {
                 this.genusFilterExclude.push(selectedGenus)
             } else {
-                console.log(this.genusFilterExclude)
                 let index = this.genusFilterExclude.findIndex(element => element == selectedGenus)
-                console.log(index)
                 this.genusFilterExclude.splice(index, 1)
             }
 

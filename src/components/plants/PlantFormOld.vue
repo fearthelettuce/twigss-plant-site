@@ -5,33 +5,32 @@
     <form @submit.prevent="submitForm">
       <section name="plant-info" class="form-group">
         <div class="section-header">
-          <div class="section-header-item">
-            <h2>Plant Info</h2>
-          </div>
+          <h2>Plant Info</h2>
         </div>
 
         <div class="section-content">
-          <div class="section-item med">
+          <div class="form-control med">
             <label for="name">Plant Name</label>
             <input id="name" name="name" type="text" v-model.trim="enteredInfo.name" @blur="autoSelectGenus($event)" />
           </div>
-          <div class="section-item small">
+          <div class="form-control small">
             <label for="genus">Genus</label>
             <select id="genus" name="genus" v-model="enteredInfo.genus">
               <option v-for="item of genusList">{{ item.label }}</option>
             </select>
           </div>
-          <div class="section-item long">
+          <div class="form-control long">
             <label for="shortDescription">Description</label>
             <textarea id="shortDescription" name="shortDescription" type="textarea" rows="3"
               v-model="enteredInfo.shortDescription" />
           </div>
+
         </div>
       </section>
 
       <section name="care-info" class="form-group">
         <div class="section-header">
-          <div class="section-header-item"><h2>Care</h2></div>
+          <h2>Care</h2>
         </div>
 
         <div class="section-content">
@@ -206,55 +205,72 @@ export default {
 </script>
 
 <style scoped>
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input,
+textarea,
+select {
+  display: block;
+  font: inherit;
+  padding: 0.15rem;
+  border: 1px solid #ccc;
+  width: 95%
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3a0061;
+  background-color: #f7ebff;
+}
+
+img {
+  height: 30em;
+}
 
 .container {
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-        margin: 60px 200px;
-        justify-content: space-around;
-    }
+  flex-wrap: wrap;
+}
 
-  .section-header {
-    display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-  }
+.section-header {
+  width: 100%;
+}
 
-  .section-header-item {
-    width: 300px;
-        align-items: center;
-  }
+.section-content {
+  display: flex;
+  flex-direction: row;
+}
 
-  .section-content {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0 8px;
-  }
+.section-content [type="textarea"] {
+  width: 70%
+}
 
-  .section-item {
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    padding: 16px;
-    margin: 6px 0;
-    justify-content: space-evenly;
-  }
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.form-control {
+  margin: 1rem 0;
+  padding: 2px 2px;
+
+}
 
 .small {
-  flex: 1 200px;
+  flex-grow: 1
 }
 
 .med {
-  flex: 1 300px;
+  flex-grow: 2
 }
 
 .long {
-  flex: 1 600px;
-}
-
-textarea {
-  flex-grow: 1;
+  flex-grow: 4
 }
 </style>
