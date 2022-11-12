@@ -1,48 +1,37 @@
 <template>
     <ul>
-        <li v-for="genus of genusList" :key="genus.label">
-            <BaseButton @click="filterGenus(genus.label)"  :mode="isSelected(genus.label) ? 'outline' :''">
-                {{ genus.label }}
+        <li v-for="product of productList" :key="product.label">
+            <BaseButton @click="filterProduct(product.label)"  :mode="isSelected(product.label) ? 'outline' :''">
+                {{ product.label }}
             </BaseButton>
         </li>
-        <BaseButton @click="clearFilter()" mode="flat">Clear Filter</BaseButton>
+        <BaseButton @click="clearFilter()" mode="flat">Clear Filters</BaseButton>
     </ul>
 </template>
 
 <script>
 import productData from '@/services/plantList'
 export default {
+    emits: [
+        'filter-product', 'clear-filter'
+    ],
     data() {
         return {
-            genusList: productData,
+            productList: productData,
             selProduct: []
         }
     },
-
-    computed: {
-        genusClicked(){
-            console.log(this.genusList)
-            if(!this.clickedGenus){ return {clicked: false}}
-            let theGenus = this.genusList[this.clickedGenus.toLowerCase()]
-            
-            if(theGenus) {
-                theGenus.clicked = this.clicked
-                theGenus.style = 'flat'
-            } 
-            return theGenus
-        }
-    },
     methods: {
-        isSelected(selectedGenus) {
-            return this.selProduct.includes(selectedGenus)
+        isSelected(selectedProduct) {
+            return this.selProduct.includes(selectedProduct)
         },
-        filterGenus(selectedGenus) {
-            if (this.isSelected(selectedGenus)) {
-                this.selProduct = this.selProduct.filter(s => s !== selectedGenus)
+        filterProduct(selectedProduct) {
+            if (this.isSelected(selectedProduct)) {
+                this.selProduct = this.selProduct.filter(s => s !== selectedProduct)
             } else {
-                this.selProduct = [...this.selProduct, selectedGenus]
+                this.selProduct = [...this.selProduct, selectedProduct]
             }
-            this.$emit('filter-genus', selectedGenus)
+            this.$emit('filter-product', selectedProduct)
         },
         clearFilter() {
             this.selProduct = []

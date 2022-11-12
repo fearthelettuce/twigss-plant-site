@@ -1,6 +1,6 @@
 <template>
     <p v-if="isLoading">Loading...</p>
-    <ProductFilter @filter-genus="filterPlants($event)" @clear-filter="clearFilter" />
+    <ProductFilter @filter-product="filterProducts($event)" @clear-filter="clearFilter" />
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
@@ -59,16 +59,16 @@ export default {
                 alert('something went wrongo dongo')
             })
         },
-        // filterPlants(selectedGenus) {
+        // filterPlants(selectedProduct) {
         //     let filteredPlants = [];
-        //     filteredPlants = this.plants.filter(plant => plant.genus === selectedGenus)
+        //     filteredPlants = this.plants.filter(plant => plant.genus === selectedProduct)
         //     this.displayPlants = filteredPlants
         // },
-        filterPlants(selectedGenus) {
-            if (!this.genusFilterExclude.includes(selectedGenus)) {
-                this.genusFilterExclude.push(selectedGenus)
+        filterProducts(selectedProduct) {
+            if (!this.genusFilterExclude.includes(selectedProduct)) {
+                this.genusFilterExclude.push(selectedProduct)
             } else {
-                let index = this.genusFilterExclude.findIndex(element => element == selectedGenus)
+                let index = this.genusFilterExclude.findIndex(element => element == selectedProduct)
                 this.genusFilterExclude.splice(index, 1)
             }
 
