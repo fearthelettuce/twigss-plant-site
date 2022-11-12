@@ -4,11 +4,11 @@ const genusData = {
     },
     heliamphora: {
         label: 'Heliamphora',
-        care: 'Intermediate'
+        care: 'Intermediate',
     },
     cephalotus: {
         label: 'Cephalotus',
-        careConditions: 'RoomTemp'
+        careConditions: 'RoomTemp',
     }
 }
 

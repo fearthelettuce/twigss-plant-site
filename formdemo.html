@@ -1,0 +1,171 @@
+<body>
+    <div class="container">
+        <form>
+            <div class="form-header">
+                <div class="form-header-item">
+                    <h2>Contact information</h2>
+                </div>
+                <div class="form-header-item">
+                    <p>Already have an account? <a href="/">Log in</a></p>
+                </div>
+            </div>
+            <div class="form-content">
+                <input class="item med" placeholder="Email" type="text">
+                <div class="item-borderless"><input type="checkbox">Email me with news and offers
+                </div>
+            </div>
+            <div class="form-header">
+                <div class="form-header-item">
+                    <h2>Shipping address</h2>
+                </div>
+
+            </div>
+
+            <div class="form-content">
+
+                <input type="text" placeholder="First name" class="item med">
+                <input type="text" placeholder="Last name" class="item med">
+                <input type="text" placeholder="Company (optional)" class="item long">
+                <input type="text" placeholder="Address" class="item long">
+                <input type="text" placeholder="Apartment, suite, etc. (optional)" class="item long">
+                <div class="float-container long">
+                    <label for="countrySelect" class="float-label">
+                        <span>Country/Region</span>
+                    </label>
+                    <select class="float-container-input" name="countrySelect">
+                        <option>United States</option>
+                    </select>
+                </div>
+                <input type="text" placeholder="City" class="item short">
+
+                <div class="float-container short">
+                    <label for="stateSelect" class="float-label">
+                        <span>State</span>
+                    </label>
+                    <select class="float-container-input" name="stateSelect">
+                        <option>Missouri</option>
+                    </select>
+                </div>
+
+                <input type="text" placeholder="ZIP code" class="item short">
+                <input type="phone" placeholder="Phone" class="item short">
+            </div>
+    </div>
+
+
+
+
+
+
+    </form>
+    </div>
+
+</body>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: 60px 200px;
+        justify-content: space-around;
+    }
+
+    .form-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .form-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .form-header-item {
+        width: 300px;
+        align-items: center;
+    }
+
+    .form-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0 8px;
+    }
+
+    .item {
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        padding: 16px;
+        margin: 6px 0;
+        justify-content: space-evenly;
+
+
+    }
+
+    .item-borderless {
+        border: none;
+        padding: 10px;
+        margin: 6px 0;
+        justify-content: space-evenly;
+    }
+
+    .float-container {
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        position: relative;
+        padding: 0;
+        display: block;
+        margin: 6px 0;
+        flex-grow: 1;
+    }
+
+    .float-label {
+        position: absolute;
+        font-size: 12px;
+        padding: 2px 4px 0;
+        color: gray;
+    }
+
+    .float-container-input {
+        margin: 0px;
+        border: none;
+        outline: 0;
+        padding: 18px 10px 6px;
+        font-size: 14px;
+    }
+
+    .long {
+        flex: 1 500px;
+    }
+
+    .med {
+        flex: 1 250px;
+    }
+
+    .short {
+        flex: 1 200px;
+    }
+
+    select {
+        margin: none;
+        padding: none;
+    }
+
+    h2 {
+        text-decoration: none;
+        font-weight: lighter;
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    input {
+        font-size: 12px;
+    }
+</style>

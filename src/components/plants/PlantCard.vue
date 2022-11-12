@@ -1,11 +1,16 @@
 <template>
     <div class="card">
         <img :src="plantData.photoUrl">
-        <div class="card-item">
-            <h2>{{ plantData.name }}</h2>
+        <div class="card-item-header">
+            <div>
+                <h2>{{ plantData.name }}</h2>
+            </div>
+            <div>
+                <h2 class="currency">{{ plantData.salePrice }}</h2>
+            </div>
         </div>
-        <div class="card-sub">
-            <p class="currency">{{ plantData.salePrice }}</p>
+        <div class="card-item">
+            <p>{{ plantData.size }}</p>
         </div>
         <div class="card-item flexible">
             <p>{{ shortDescrDisplay }}</p>
@@ -34,7 +39,7 @@ export default {
     components: { BaseCard, PlantForm },
     props: ['plantData'],
     computed: {
-        shortDescrDisplay() { return this.strLimit(this.plantData.shortDescription, 120) }
+        shortDescrDisplay() { return this.strLimit(this.plantData.shortDescription, 110) }
     },
     data() {
         return {
@@ -67,6 +72,11 @@ img {
     object-fit: cover;
 }
 
+p {
+    margin: 0 auto;
+    padding: 2px
+}
+
 .card {
     padding: 10px;
     display: flex;
@@ -75,8 +85,14 @@ img {
     flex-basis: 24%
 }
 
-.card-item {
-    padding: 8px 14px 8px 14px;
+.card-item .card-item-header {
+    padding: 2px 14px 2px 14px;
+}
+
+.card-item-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
 }
 
 .card-sub {

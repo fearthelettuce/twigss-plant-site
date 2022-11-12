@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         filterGenus(selectedGenus) {
-            this.clicked = !this.clicked
+            this.clicked = !this.clicked //filter not correctly toggling button styles
             this.$emit('filter-genus', selectedGenus)
         },
         clearFilter() {
