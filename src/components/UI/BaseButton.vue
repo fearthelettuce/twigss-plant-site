@@ -54,4 +54,8 @@ button:active {
 .flat:active {
   background-color: #97e627;
 }
+.small {
+  padding: .25rem .5rem
+}
 </style>
+

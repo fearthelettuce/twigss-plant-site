@@ -1,11 +1,11 @@
 <template>
     <ul>
         <li v-for="product of productData" :key="product.label">
-            <BaseButton @click="filterProduct(product.label)"  :mode="isSelected(product.label) ? 'outline' :''">
+            <BaseButton @click="filterProduct(product.label)"  :mode="isSelected(product.label) ? 'outline small' :'small'">
                 {{ product.label }}
             </BaseButton>
         </li>
-        <BaseButton @click="clearFilter()" mode="flat">Clear Filters</BaseButton>
+        <BaseButton @click="clearFilter()" mode="flat small">Clear Filters</BaseButton>
     </ul>
 </template>
 

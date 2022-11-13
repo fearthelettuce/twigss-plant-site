@@ -1,9 +1,14 @@
 <template>
     <p v-if="isLoading">Loading...</p>
-    <ProductFilter @filter-product="filterProducts($event, filters.genusFilter.exclude)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
-    
-    <ProductFilter @filter-product="filterProducts($event, filters.careTemp.exclude)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
-    
+    <div class="filter-container">
+        <div>
+            <BaseButton mode="flat small" @click="toggleFilterDisplay">{{filterToggleLabel}}</BaseButton>
+        </div>
+        <div v-show="showFilters" class="filter-container">
+            <ProductFilter @filter-product="filterProducts($event, filters.genusFilter.exclude)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
+            <ProductFilter @filter-product="filterProducts($event, filters.careTemp.exclude)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
+        </div>
+</div>    
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
@@ -28,7 +33,8 @@ export default {
         return {
             plants: [],
             isLoading: false,
-            genusFilterExclude: [],
+            // genusFilterExclude: [],
+            showFilters: true,
             genusList: genusData,
             careConditions: careData,
             filters: {
@@ -57,6 +63,13 @@ export default {
                filteredPlants = filteredPlants.filter(plant => !filterArr.includes(plant[this.filters[prodFilter].criteria]))
             }
             return filteredPlants
+        },
+        filterToggleLabel(){
+            if(this.showFilters){
+                return 'Hide Filters'
+            } else {
+                return 'Show Filters'
+            }
         }
     },
     methods: {
@@ -86,11 +99,10 @@ export default {
                 let index = filterArr.findIndex(element => element == selectedProduct)
                 filterArr.splice(index, 1)
             }
-
         },
-        // clearFilter() {
-        //     this.displayPlants = this.plants
-        // },
+        toggleFilterDisplay(){
+            this.showFilters = !this.showFilters
+        },
         clearFilter(filterKey) { filterKey.exclude = [] }
     },
     created() {
@@ -102,8 +114,8 @@ export default {
 <style>
 .container {
     width: 100%;
-
-    margin: 20px auto;
+    margin: 0;
+    padding: 0 20px;
     flex-wrap: wrap;
 }
 
@@ -127,6 +139,12 @@ export default {
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0 30px;
 }
 
 /* @media (min-width: 480px) {
