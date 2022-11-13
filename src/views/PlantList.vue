@@ -52,12 +52,10 @@ export default {
     computed: {
         displayPlants() {
             let filteredPlants = this.plants
-            // for(let prodFilter in this.filters) {
-            //    let filterArr = prodFilter.exclude
-            //    filteredPlants = filteredPlants.filter(plant => !filterArr.includes(plant[prodFilter.criteria]))
-            // }
-            filteredPlants = filteredPlants.filter(plant => !this.filters.genusFilter.exclude.includes(plant[this.filters.genusFilter.criteria]))
-            filteredPlants = filteredPlants.filter(plant => !this.filters.careTemp.exclude.includes(plant[this.filters.careTemp.criteria]))
+            for(let prodFilter in this.filters) {
+               let filterArr = this.filters[prodFilter].exclude
+               filteredPlants = filteredPlants.filter(plant => !filterArr.includes(plant[this.filters[prodFilter].criteria]))
+            }
             return filteredPlants
         }
     },
