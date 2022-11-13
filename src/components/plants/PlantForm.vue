@@ -40,13 +40,9 @@
             <input id="careDifficulty" name="careDifficulty" type="number" v-model="enteredInfo.careDifficulty" />
           </div>
           <div class="form-control small">
-            <label for="careConditions small">Care Conditions</label>
-            <select id="careConditions" name="careConditions" v-model="enteredInfo.careConditions">
-              <option value="Intermediate">Intermediate</option>
-              <option value="Highland">Highland</option>
-              <option value="RoomTemp">Room Temp</option>
-              <option value="Lowland">Lowland</option>
-              <option value="Other">Other</option>
+            <label for="careTemp small">Care Temp</label>
+            <select id="careTemp" name="careTemp" v-model="enteredInfo.careTemp">
+              <option v-for="temp in careConditions.careTemp" :value="temp.label">{{temp.label}}</option>
             </select>
           </div>
         </div>
@@ -80,7 +76,10 @@
             <input id="photoUrl" name="photoUrl" type="URL" v-model="enteredInfo.photoUrl" />
           </div>
         </div>
-
+        <div class="form-control long">
+            <label for="actualPhoto">Photo of the actual plant for sale?</label>
+            <input id="actualPhoto" name="actualPhoto" type="checkbox" v-model="enteredInfo.actualPhoto" />
+        </div>
         <div>
           <h2>Image Preview</h2>
           <img :src="enteredInfo.photoUrl">
@@ -103,6 +102,7 @@
 <script>
 import backend from '@/services/firebaseApi'
 import genusData from '@/services/plantList'
+import careData from '@/services/careData'
 export default {
   props: ['id'],
   data() {
@@ -113,14 +113,16 @@ export default {
         shortDescription: '',
         careDifficulty: null,
         careConditions: '',
+        careTemp: '',
         size: '',
         availableForSale: false,
         quantity: 0,
         salePrice: 0,
         photoUrl: '',
+        actualPhoto: true,
       },
       genusList: genusData,
-
+      careConditions: careData,
       showSuccessMessage: false,
       showDeleteMessage: false,
     }

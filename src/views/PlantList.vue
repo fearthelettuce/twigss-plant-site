@@ -1,6 +1,9 @@
 <template>
     <p v-if="isLoading">Loading...</p>
-    <ProductFilter @filter-product="filterProducts($event)" @clear-filter="clearFilter" :productData="genusList"/>
+    <ProductFilter @filter-product="filterProducts($event, filters.genusFilter.exclude)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
+    
+    <ProductFilter @filter-product="filterProducts($event, filters.careTemp.exclude)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
+    
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
@@ -15,6 +18,7 @@
 import PlantCard from '../components/plants/PlantCard.vue'
 import ProductFilter from '../components/plants/ProductFilter.vue'
 import genusData from '@/services/plantList.js'
+import careData from '@/services/careData.js'
 import backend from '@/services/firebaseApi'
 
 export default {
@@ -26,6 +30,17 @@ export default {
             isLoading: false,
             genusFilterExclude: [],
             genusList: genusData,
+            careConditions: careData,
+            filters: {
+                genusFilter: {
+                    exclude: [],
+                    criteria: 'genus'
+                },
+                careTemp: {
+                    exclude: [],
+                    criteria: 'careTemp'
+                }
+            }
         }
     },
     provide() {
@@ -36,8 +51,13 @@ export default {
     },
     computed: {
         displayPlants() {
-            let filteredPlants = []
-            filteredPlants = this.plants.filter(plant => !this.genusFilterExclude.includes(plant.genus))
+            let filteredPlants = this.plants
+            // for(let prodFilter in this.filters) {
+            //    let filterArr = prodFilter.exclude
+            //    filteredPlants = filteredPlants.filter(plant => !filterArr.includes(plant[prodFilter.criteria]))
+            // }
+            filteredPlants = filteredPlants.filter(plant => !this.filters.genusFilter.exclude.includes(plant[this.filters.genusFilter.criteria]))
+            filteredPlants = filteredPlants.filter(plant => !this.filters.careTemp.exclude.includes(plant[this.filters.careTemp.criteria]))
             return filteredPlants
         }
     },
@@ -61,24 +81,19 @@ export default {
                 alert('something went wrongo dongo')
             })
         },
-        // filterPlants(selectedProduct) {
-        //     let filteredPlants = [];
-        //     filteredPlants = this.plants.filter(plant => plant.genus === selectedProduct)
-        //     this.displayPlants = filteredPlants
-        // },
-        filterProducts(selectedProduct) {
-            if (!this.genusFilterExclude.includes(selectedProduct)) {
-                this.genusFilterExclude.push(selectedProduct)
+        filterProducts(selectedProduct, filterArr) {
+            if (!filterArr.includes(selectedProduct)) {
+                filterArr.push(selectedProduct)
             } else {
-                let index = this.genusFilterExclude.findIndex(element => element == selectedProduct)
-                this.genusFilterExclude.splice(index, 1)
+                let index = filterArr.findIndex(element => element == selectedProduct)
+                filterArr.splice(index, 1)
             }
 
         },
         // clearFilter() {
         //     this.displayPlants = this.plants
         // },
-        clearFilter() { this.genusFilterExclude = [] }
+        clearFilter(filterKey) { filterKey.exclude = [] }
     },
     created() {
         this.getPlants()

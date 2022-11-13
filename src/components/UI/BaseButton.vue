@@ -45,8 +45,8 @@ button:active {
 
 .outline:hover,
 .outline:active {
-  background-color: rgb(103, 202, 37);
-  border-color: rgb(103, 202, 37);
+  background-color: #97e627;
+  border-color: #97e627;
   color: white;
 }
 
