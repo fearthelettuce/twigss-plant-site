@@ -1,6 +1,6 @@
 <template>
     <p v-if="isLoading">Loading...</p>
-    <ProductFilter @filter-product="filterProducts($event)" @clear-filter="clearFilter" />
+    <ProductFilter @filter-product="filterProducts($event)" @clear-filter="clearFilter" :productData="genusList"/>
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
@@ -14,6 +14,7 @@
 // import PlantCard from '@/components/plants/PlantCard'
 import PlantCard from '../components/plants/PlantCard.vue'
 import ProductFilter from '../components/plants/ProductFilter.vue'
+import genusData from '@/services/plantList.js'
 import backend from '@/services/firebaseApi'
 
 export default {
@@ -24,6 +25,7 @@ export default {
             plants: [],
             isLoading: false,
             genusFilterExclude: [],
+            genusList: genusData,
         }
     },
     provide() {
