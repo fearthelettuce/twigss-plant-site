@@ -128,7 +128,7 @@ export default {
     }
   },
   methods: {
-    savePlant(event) {
+    async savePlant(event) {
       const plant = this.enteredInfo
       if (this.id) {
         plant.id = this.id
@@ -142,8 +142,13 @@ export default {
     },
 
     saveAndExit(event) {
-      this.savePlant(event)
-      this.$router.push('/');
+      this.savePlant(event).then((response)=>{
+        this.$router.push('/');
+      }).catch((error)=>{
+        alert('something went wrongo dongo')
+        console.error(error)
+      })
+      
 
       // TODO - when saving a new plant and going back to PlantList, the list isn't updated with the new plant.  
     },
@@ -213,7 +218,7 @@ export default {
         display: flex;
         flex-direction: column;
         width: 50%;
-        margin: 60px 200px;
+        margin: 60px 80px;
         justify-content: space-around;
     }
 
@@ -254,6 +259,10 @@ export default {
 
 .long {
   flex: 1 600px;
+}
+
+img {
+  height: 200px;
 }
 
 textarea {

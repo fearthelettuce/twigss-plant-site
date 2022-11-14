@@ -143,6 +143,7 @@
         <h2>
             Heliamphora Beginner Guide
         </h2>
+        <img src="https://lh3.googleusercontent.com/kD_jExJ6OqyynYfV6kasFRdcDy5CcUk71hwhYXP05JlM-nr53DFUtOYRpQcxaQ3qCepu4P7G8yt_CfsAfVQChtVXD34rqAWQaX-_8KUHAf_vqR7jmYiknIBScPRu5ul04EnG9jxRtE0=w2400">
     </a>
 
     <a name='CephalotusGuide'>

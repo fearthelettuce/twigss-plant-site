@@ -5,13 +5,16 @@
             <BaseButton mode="flat small" @click="toggleFilterDisplay">{{filterToggleLabel}}</BaseButton>
         </div>
         <div v-show="showFilters" class="filter-container">
-            <ProductFilter @filter-product="filterProducts($event, filters.genusFilter.exclude)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
-            <ProductFilter @filter-product="filterProducts($event, filters.careTemp.exclude)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
+            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.genusFilter.exclude)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
+            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.careTemp.exclude)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
+            <BaseToggle class="filter-item" @click="filterOOO($event, filters.outOfStock)" :value="filters.outOfStock.exclude">Show out of stock</BaseToggle>
         </div>
+        
 </div>    
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
+                <div v-if="filterNoData"><p>There are no plants availale for your selected filters.</p></div>
                 <plant-card v-for="plant of displayPlants" :plant-data="plant"></plant-card>
             </div>
         </div>
@@ -45,7 +48,11 @@ export default {
                 careTemp: {
                     exclude: [],
                     criteria: 'careTemp'
-                }
+                },
+                outOfStock: {
+                    exclude: [],
+                    criteria: 'quantity',
+                },
             }
         }
     },
@@ -63,6 +70,11 @@ export default {
                filteredPlants = filteredPlants.filter(plant => !filterArr.includes(plant[this.filters[prodFilter].criteria]))
             }
             return filteredPlants
+        },
+        filterNoData(){
+            if(this.displayPlants.length === 0 && this.plants.length > 0) {
+                return true;
+            }
         },
         filterToggleLabel(){
             if(this.showFilters){
@@ -106,7 +118,7 @@ export default {
         clearFilter(filterKey) { filterKey.exclude = [] }
     },
     created() {
-        this.getPlants()
+        setTimeout(()=>{this.getPlants()}, 80)
     },
 }
 </script>
@@ -145,8 +157,12 @@ export default {
     display: flex;
     flex-direction: row;
     padding: 0 30px;
+    align-items: center;
 }
 
+.filter-item {
+    padding: 0 25px;
+}
 /* @media (min-width: 480px) {
 
 .card-wrap-inner { 
