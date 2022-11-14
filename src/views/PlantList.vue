@@ -43,15 +43,20 @@ export default {
             filters: {
                 genusFilter: {
                     exclude: [],
-                    criteria: 'genus'
+                    criteria: 'genus',
+                    filterFunction: (arr, filterCriteria, filterData)=>{
+                        return arr.filter(plant => !filterData.includes(plant[filterCriteria]))},
                 },
                 careTemp: {
                     exclude: [],
-                    criteria: 'careTemp'
+                    criteria: 'careTemp',
+                    filterFunction: (arr, filterCriteria, filterData)=>{
+                        return arr.filter(plant => !filterData.includes(plant[filterCriteria]))},
                 },
                 outOfStock: {
                     exclude: [],
                     criteria: 'quantity',
+                    filterFunction: (arr, filterCriteria)=>{return arr}
                 },
             }
         }
@@ -66,8 +71,7 @@ export default {
         displayPlants() {
             let filteredPlants = this.plants
             for(let prodFilter in this.filters) {
-               let filterArr = this.filters[prodFilter].exclude
-               filteredPlants = filteredPlants.filter(plant => !filterArr.includes(plant[this.filters[prodFilter].criteria]))
+               filteredPlants = this.filters[prodFilter].filterFunction(filteredPlants, this.filters[prodFilter].criteria, this.filters[prodFilter].exclude)
             }
             return filteredPlants
         },
