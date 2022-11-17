@@ -16,7 +16,7 @@
             <p>{{ shortDescrDisplay }}</p>
         </div>
         <div class="card-footer">
-            <router-link :to="'/plants/' + plantData.id">
+            <router-link :to="updatePlantLink">
                 <base-button mode="outline" :plantData="plantData">View Details</base-button>
             </router-link>
             <router-link v-if="isAdmin" :to="'/plants/update/' + plantData.id">
@@ -39,7 +39,8 @@ export default {
     components: { BaseCard, PlantForm },
     props: ['plantData'],
     computed: {
-        shortDescrDisplay() { return this.strLimit(this.plantData.shortDescription, 110) }
+        shortDescrDisplay() { return this.strLimit(this.plantData.shortDescription, 110) },
+        updatePlantLink() { return `/plants/${this.plantData.id}` }
     },
     data() {
         return {

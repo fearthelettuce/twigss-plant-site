@@ -1,31 +1,33 @@
 <template>
+  <div>
     <slot></slot>
     <label class="switch">
-        <input type="checkbox" :checked="!value" @change="toggle">
-        <span class="slider round"></span>
+      <input type="checkbox" :checked="!value" @change="toggle">
+      <span class="slider round"></span>
     </label>
-  </template>
+  </div>
+</template>
 
 <script>
 
-    export default {
-        props: {
-            value: {
-                type: Boolean,
-                required: true,
-            }
-    },
-    methods: {
-        toggle(){
-            this.$emit('toggleInput', !this.value)
-        }
+export default {
+  props: {
+    value: {
+      type: Boolean,
+      required: true,
     }
+  },
+  methods: {
+    toggle() {
+      this.$emit('toggleInput', !this.value)
     }
+  }
+}
 </script>
-  <style scoped>
+<style scoped>
 /* The switch - the box around the slider */
 .label {
-    padding: .25rem .5rem
+  padding: .25rem .5rem
 }
 
 .switch {
@@ -67,15 +69,16 @@
   transition: .4s;
 }
 
-input:checked + .slider {
-  background-color: rgb(103, 202, 37);;
+input:checked+.slider {
+  background-color: rgb(103, 202, 37);
+  ;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(15px);
   -ms-transform: translateX(15px);
   transform: translateX(15px);
@@ -89,4 +92,4 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-  </style>
+</style>

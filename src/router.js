@@ -6,18 +6,26 @@ import TheBlog from './components/blog/TheBlog.vue'
 import TheGuide from './components/guide/TheGuide.vue'
 
 const routesArr = [
-    { path: '/', component: PlantList },
+    { path: '/', redirect: '/plants' },
     { path: '/plants', component: PlantList, headerLabel: 'Plants' },
     { path: '/plants/:id', component: PlantDetails, props: true },
     { path: '/plants/new', component: AddPlant, headerLabel: 'Add Plant' },
     { path: '/plants/update/:id', component: AddPlant, props: true },
     { path: '/guide', component: TheGuide, headerLabel: 'Care Guide' },
-    { path: '/blog', component: TheBlog, headerLabel: 'Blog' }
+    { path: '/blog', component: TheBlog, headerLabel: 'Blog' },
+    { path: '/:notFound(.*)', redirect: '/' }
 ]
 
 const router = createRouter({
     routes: routesArr,
     history: createWebHistory(),
+    scrollBehavior(_, _2, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        } return {
+            left: 0, top: 0
+        }
+    }
 });
 
 export { router, routesArr };

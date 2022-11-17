@@ -1,7 +1,8 @@
 <template>
     <ul>
         <li v-for="product of productData" :key="product.label">
-            <BaseButton @click="filterProduct(product.label)"  :mode="isSelected(product.label) ? 'outline small' :'small'">
+            <BaseButton @click="filterProduct(product.label)"
+                :mode="isSelected(product.label) ? 'outline small' : 'small'">
                 {{ product.label }}
             </BaseButton>
         </li>

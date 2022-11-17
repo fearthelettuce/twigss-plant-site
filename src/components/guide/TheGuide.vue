@@ -139,32 +139,52 @@
                 target='blank'>PVC
                 Sheet</a></li>
     </ul>
-    <a name='HeliamphoraGuide'>
-        <h2>
-            Heliamphora Beginner Guide
-        </h2>
-        <img src="https://lh3.googleusercontent.com/kD_jExJ6OqyynYfV6kasFRdcDy5CcUk71hwhYXP05JlM-nr53DFUtOYRpQcxaQ3qCepu4P7G8yt_CfsAfVQChtVXD34rqAWQaX-_8KUHAf_vqR7jmYiknIBScPRu5ul04EnG9jxRtE0=w2400">
-    </a>
+    <a name='HeliamphoraGuide'></a>
+    <h2>
+        Heliamphora Beginner Guide
+    </h2>
+    <img
+        src="https://lh3.googleusercontent.com/kD_jExJ6OqyynYfV6kasFRdcDy5CcUk71hwhYXP05JlM-nr53DFUtOYRpQcxaQ3qCepu4P7G8yt_CfsAfVQChtVXD34rqAWQaX-_8KUHAf_vqR7jmYiknIBScPRu5ul04EnG9jxRtE0=w2400">
 
-    <a name='CephalotusGuide'>
-        <h2>
-            Cephalotus Beginner Guide
-        </h2>
-    </a>
-    <a name='HighlandGrowChamber'>
-        <h2>
-            Highland Grow Chamber
-        </h2>
-        <h3>Overview</h3>
-        <p>This is a grow chamber that I built on some shelves made out of 2x4s and plywood. <a
-                href='https://ana-white.com/woodworking-projects/best-diy-garage-shelves-attached-walls'> Here is a
-                link</a> to a tutorial on building the shelves, however there's nothing special about these paticular
-            shelves. Tt's just a great simple way of building shelves. The size of the shelves (2' x 4') is a great size
-            for a grow chamber and it may be more difficult to find certain parts (like the platform the plants sit on)
-            if you choose a different dimension.
 
-        </p>
-    </a>
+    <a name='CephalotusGuide'></a>
+    <h2>
+        Cephalotus Beginner Guide
+    </h2>
+
+    <h3>Lighting</h3>
+    <p>I grow mine under LED grow lights, specifically HLG 65 V2 4000K and Florawave P80
+        You sent</p>
+
+    <h3>Watering</h3>
+    <p>Always use rainwater or reverse osmosis water.
+        I have done a mixture of top watering and tray watering. I think both work fine, the key is not too much
+        water. Regardless of which method you use, the tray should mostly dry out between waterings, these are not bog
+        plants.</p>
+
+    <h3>Humidity</h3>
+    <p>I haven't found Cephs to be particularly picky about humidity. I grow mine in my basement freely open to the room
+        air.</p>
+    <h3>Media</h3>
+    <p>I use a mixture of peat, sand and pumice. You can also use perlite, however I don't like how it tends to float to
+        the top of the media - pumice stays in place.
+        I usually add a top layer of lava rock, sand, or slate chips primarily for aesthetics, although lava rock and
+        slate prevent algae and moss from growing.</p>
+    <h3>Fertilizer</h3>
+    <p>When grown indoors, my cephs don't usually catch anything. I fertilize open pitchers every 3-6 weeks with either
+        Maxsea, Osmocote pellets, or Nutricote pellets.</p>
+
+    <a name='HighlandGrowChamber'>Highland Grow Chamber</a>
+    <h3>Overview</h3>
+    <p>This is a grow chamber that I built on some shelves made out of 2x4s and plywood. <a
+            href='https://ana-white.com/woodworking-projects/best-diy-garage-shelves-attached-walls'> Here is a
+            link</a> to a tutorial on building the shelves, however there's nothing special about these particular
+        shelves. Tt's just a great simple way of building shelves. The size of the shelves (2' x 4') is a great size
+        for a grow chamber and it may be more difficult to find certain parts (like the platform the plants sit on)
+        if you choose a different dimension.
+
+    </p>
+
 
 
 </template>

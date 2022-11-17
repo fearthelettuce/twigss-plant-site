@@ -1,24 +1,32 @@
 <template>
+    <RouterView />
     <p v-if="isLoading">Loading...</p>
     <div class="filter-container">
         <div>
-            <BaseButton mode="flat small" @click="toggleFilterDisplay">{{filterToggleLabel}}</BaseButton>
+            <BaseButton mode="flat small" @click="toggleFilterDisplay">{{ filterToggleLabel }}</BaseButton>
         </div>
         <div v-show="showFilters" class="filter-container">
-            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.genusFilter.filterData)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
-            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.careTemp.filterData)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
-            <BaseToggle class="filter-item" @toggle-input="toggleBool(filters.outOfStock.filterData)" v-model="filters.outOfStock.filterData" :value="filters.outOfStock.filterData">Show out of stock</BaseToggle>
+            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.genusFilter.filterData)"
+                @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList" />
+            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.careTemp.filterData)"
+                @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp" />
+            <BaseToggle class="filter-item" @toggle-input="toggleBool(filters.outOfStock.filterData)"
+                v-model="filters.outOfStock.filterData" :value="filters.outOfStock.filterData">Show out of stock
+            </BaseToggle>
         </div>
-        
-</div>    
+
+    </div>
     <div class="container">
         <div class="card-wrap-outer">
             <div class="card-wrap-inner">
-                <div v-if="filterNoData"><p>There are no plants availale for your selected filters.</p></div>
+                <div v-if="filterNoData">
+                    <p>There are no plants available for your selected filters.</p>
+                </div>
                 <plant-card v-for="plant of displayPlants" :plant-data="plant"></plant-card>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -43,23 +51,25 @@ export default {
                 genusFilter: {
                     filterData: [],
                     criteria: 'genus',
-                    filterFunction: (arr, filterCriteria, filterData)=>{
-                        return arr.filter(plant => !filterData.includes(plant[filterCriteria]))},
+                    filterFunction: (arr, filterCriteria, filterData) => {
+                        return arr.filter(plant => !filterData.includes(plant[filterCriteria]))
+                    },
                 },
                 careTemp: {
                     filterData: [],
                     criteria: 'careTemp',
-                    filterFunction: (arr, filterCriteria, filterData)=>{
-                        return arr.filter(plant => !filterData.includes(plant[filterCriteria]))},
+                    filterFunction: (arr, filterCriteria, filterData) => {
+                        return arr.filter(plant => !filterData.includes(plant[filterCriteria]))
+                    },
                 },
                 outOfStock: {
-                    filterData: false,
+                    filterData: true,
                     criteria: 'quantity',
-                    filterFunction: (arr, filterCriteria, filterData)=>{
+                    filterFunction: (arr, filterCriteria, filterData) => {
                         let resultArr = arr.filter(
                             plant => (
-                                plant[filterCriteria]>0) == filterData
-                            )
+                                plant[filterCriteria] > 0) == filterData
+                        )
                         return resultArr
 
                     }
@@ -76,18 +86,18 @@ export default {
     computed: {
         displayPlants() {
             let filteredPlants = this.plants
-            for(let prodFilter in this.filters) {
-               filteredPlants = this.filters[prodFilter].filterFunction(filteredPlants, this.filters[prodFilter].criteria, this.filters[prodFilter].filterData)
+            for (let prodFilter in this.filters) {
+                filteredPlants = this.filters[prodFilter].filterFunction(filteredPlants, this.filters[prodFilter].criteria, this.filters[prodFilter].filterData)
             }
             return filteredPlants
         },
-        filterNoData(){
-            if(this.displayPlants.length === 0 && this.plants.length > 0) {
+        filterNoData() {
+            if (this.displayPlants.length === 0 && this.plants.length > 0) {
                 return true;
             }
         },
-        filterToggleLabel(){
-            if(this.showFilters){
+        filterToggleLabel() {
+            if (this.showFilters) {
                 return 'Hide Filters'
             } else {
                 return 'Show Filters'
@@ -122,16 +132,16 @@ export default {
                 filterArr.splice(index, 1)
             }
         },
-        toggleFilterDisplay(){
+        toggleFilterDisplay() {
             this.showFilters = !this.showFilters
         },
-        toggleBool(){
+        toggleBool() {
             this.filters.outOfStock.filterData = !this.filters.outOfStock.filterData
         },
         clearFilter(filterKey) { filterKey.filterData = [] }
     },
     created() {
-        setTimeout(()=>{this.getPlants()}, 80)
+        setTimeout(() => { this.getPlants() }, 80)
     },
 }
 </script>
@@ -176,6 +186,7 @@ export default {
 .filter-item {
     padding: 0 25px;
 }
+
 /* @media (min-width: 480px) {
 
 .card-wrap-inner { 
