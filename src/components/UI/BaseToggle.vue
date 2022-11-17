@@ -1,11 +1,27 @@
 <template>
-    <div class="label"><slot></slot></div>
+    <slot></slot>
     <label class="switch">
-        <input type="checkbox">
+        <input type="checkbox" :checked="!value" @change="toggle">
         <span class="slider round"></span>
     </label>
   </template>
-    
+
+<script>
+
+    export default {
+        props: {
+            value: {
+                type: Boolean,
+                required: true,
+            }
+    },
+    methods: {
+        toggle(){
+            this.$emit('toggleInput', !this.value)
+        }
+    }
+    }
+</script>
   <style scoped>
 /* The switch - the box around the slider */
 .label {

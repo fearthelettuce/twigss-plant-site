@@ -5,9 +5,9 @@
             <BaseButton mode="flat small" @click="toggleFilterDisplay">{{filterToggleLabel}}</BaseButton>
         </div>
         <div v-show="showFilters" class="filter-container">
-            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.genusFilter.exclude)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
-            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.careTemp.exclude)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
-            <BaseToggle class="filter-item" @click="filterOOO($event, filters.outOfStock)" :value="filters.outOfStock.exclude">Show out of stock</BaseToggle>
+            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.genusFilter.filterData)" @clear-filter="(event) => clearFilter(filters.genusFilter, event)" :productData="genusList"/>
+            <ProductFilter class="filter-item" @filter-product="filterProducts($event, filters.careTemp.filterData)" @clear-filter="clearFilter(filters.careTemp)" :productData="careConditions.careTemp"/>
+            <BaseToggle class="filter-item" @toggle-input="toggleBool(filters.outOfStock.filterData)" v-model="filters.outOfStock.filterData" :value="filters.outOfStock.filterData">Show out of stock</BaseToggle>
         </div>
         
 </div>    
@@ -36,42 +36,48 @@ export default {
         return {
             plants: [],
             isLoading: false,
-            // genusFilterExclude: [],
             showFilters: true,
             genusList: genusData,
             careConditions: careData,
             filters: {
                 genusFilter: {
-                    exclude: [],
+                    filterData: [],
                     criteria: 'genus',
                     filterFunction: (arr, filterCriteria, filterData)=>{
                         return arr.filter(plant => !filterData.includes(plant[filterCriteria]))},
                 },
                 careTemp: {
-                    exclude: [],
+                    filterData: [],
                     criteria: 'careTemp',
                     filterFunction: (arr, filterCriteria, filterData)=>{
                         return arr.filter(plant => !filterData.includes(plant[filterCriteria]))},
                 },
                 outOfStock: {
-                    exclude: [],
+                    filterData: false,
                     criteria: 'quantity',
-                    filterFunction: (arr, filterCriteria)=>{return arr}
+                    filterFunction: (arr, filterCriteria, filterData)=>{
+                        let resultArr = arr.filter(
+                            plant => (
+                                plant[filterCriteria]>0) == filterData
+                            )
+                        return resultArr
+
+                    }
                 },
             }
         }
     },
-    provide() {
-        return {
-            plants: this.plants,
+    // provide() {
+    //     return {
+    //         plants: this.plants,
 
-        }
-    },
+    //     }
+    // },
     computed: {
         displayPlants() {
             let filteredPlants = this.plants
             for(let prodFilter in this.filters) {
-               filteredPlants = this.filters[prodFilter].filterFunction(filteredPlants, this.filters[prodFilter].criteria, this.filters[prodFilter].exclude)
+               filteredPlants = this.filters[prodFilter].filterFunction(filteredPlants, this.filters[prodFilter].criteria, this.filters[prodFilter].filterData)
             }
             return filteredPlants
         },
@@ -119,7 +125,10 @@ export default {
         toggleFilterDisplay(){
             this.showFilters = !this.showFilters
         },
-        clearFilter(filterKey) { filterKey.exclude = [] }
+        toggleBool(){
+            this.filters.outOfStock.filterData = !this.filters.outOfStock.filterData
+        },
+        clearFilter(filterKey) { filterKey.filterData = [] }
     },
     created() {
         setTimeout(()=>{this.getPlants()}, 80)
