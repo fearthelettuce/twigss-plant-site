@@ -3,7 +3,7 @@ import PlantList from './views/PlantList.vue'
 import AddPlant from './components/plants/AddPlant.vue'
 import PlantDetails from './components/plants/PlantDetails.vue'
 import TheBlog from './components/blog/TheBlog.vue'
-import TheGuide from './components/guide/TheGuide.vue'
+import TheGuide from './views/TheGuide.vue'
 
 const routesArr = [
     { path: '/', redirect: '/plants' },
